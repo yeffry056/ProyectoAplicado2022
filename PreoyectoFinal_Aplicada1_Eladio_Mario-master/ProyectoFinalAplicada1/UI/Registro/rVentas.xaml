@@ -1,0 +1,138 @@
+﻿<Window x:Class="ProyectoFinalAplicada1.UI.Registro.rVentas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoFinalAplicada1.UI.Registro"
+        mc:Ignorable="d"
+        Icon="/Resources/Venta.png"
+        Title="Registro Ventas" Height="671" Width="766" FontSize="15">
+    <Grid  >
+
+        <StackPanel Orientation="Vertical" >
+            <Label Content="Venta Id" />
+
+            <!--OrdenIdTextBox y BuscarButton-->
+            <!--Button-->
+            <!--"BucarButton_Click"-->
+            <StackPanel Orientation="Horizontal" >
+                
+                <TextBox x:Name="VentaIdTextBox" Width="150" Text="{Binding VentaId}" />
+                
+                <Button Name="BucarButton" Margin="20,0" Click="BucarButton_Click" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Buscar.png" />
+                        <Label Content="Buscar" Height="27" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Vertical">
+                <Label Content="Fecha" />
+                <DatePicker x:Name="FechaDatePicker" SelectedDate="{Binding Fecha,StringFormat=dd/MM/yyyy}"  />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" >
+                <Label Content="Cliente Id" />
+                <TextBox Name="ClienteIdTextBox" Text="{Binding ClienteId}"   />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Vendedor Id" />
+                <Label Content="Nombre" Margin="50,0,0,0" />
+                <Label Content="Apellido" Margin="140,0,0,0" />
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               
+            </StackPanel>
+
+            <GroupBox Header="Orden Detalle" BorderBrush="#FF414649"   >
+                <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                    <StackPanel Orientation="Horizontal" >
+                        <Label Content="Producto ID" FontSize="14" Margin="0,0,0,0"/>
+                        <Label Content="Cantidad" FontSize="14" Margin="19,0,0,0"/>
+                        <Label Content="Descripcion" FontSize="14" Margin="25,0,0,0"/>
+
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal"  >
+                        <ComboBox x:Name="ProductoComboBox" Width="92" SelectedValue="{Binding ProductoId}"/>
+                        <TextBox x:Name="CantidadTextBox" Width="64" Height="20" Margin="33,0,0,0" Text="{Binding Cantidad}" />
+                        <TextBox x:Name="DescripcionTextBox" Width="260" Height="20" Margin="22,0,0,0" Text="{Binding Descripcion}" />
+
+                        <Button x:Name="AgregarButton" Width="88" Height="23" Margin="22,0,5,0" Click="AgregarButton_Click" >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/agregar.png" />
+                                <Label Content="Agregar" Margin="4,0" Padding="-1"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!--RemoverButton-->
+                        <Button x:Name="RemoverButton" Width="94" Height="23" Margin="5,0" Click="RemoverButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Cancelar.jfif" />
+                                <Label Content="Remover" Margin="4,0" Padding="-1"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <DataGrid x:Name="DetalleDataGrid" AlternatingRowBackground="#FFBAE3FF" AutoGenerateColumns="False" ItemsSource="{Binding VentaDetalle}" Margin="0,5,0,0" Width="735"  Height="189">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Venta Id" Binding="{Binding VentaId}" Visibility="Hidden"  />
+                            <DataGridTextColumn Header="Producto Id"  Binding="{Binding productos.ProductoId}"/>
+                            <DataGridTextColumn Header="Cantidad"  Binding="{Binding Cantidad}"/>
+                            <DataGridTextColumn Header="Descripción"  Binding="{Binding productos.Descripcion}"/>
+                            <DataGridTextColumn Header="Precio"  Binding="{Binding Precio}"/>
+                            <DataGridTextColumn Header="Costo"  Binding="{Binding Costo}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </StackPanel>
+
+            </GroupBox>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Monto Total" Margin="30,0"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Height="43">
+                <Label x:Name="PrecioTotalLabel" FontSize="20" Content="{Binding CostoTotal}"  Width="123" Margin="35,0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Width="538" Height="49" >
+
+                <Button x:Name="NuevoButton" Margin="15,0"  Click="NuevoButton_Click" Width="110"  >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Nuevo.png"  />
+                        <Label Content="Nuevo" Height="29" Width="61"  />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="GuardarButton"   Click="GuardarButton_Click" Width="117" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Guardar.png" />
+                        <Label Content="Guardar"  Margin="4,0" Height="30" Width="57"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="EliminarButton" Margin="15,0" Width="121" Click="BtnEliminar"  >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Cancelar.jfif" />
+                        <Label Content="Eliminar" Height="28" Width="70"  />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ImprimirButton" Width="130" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Imprimir.png" />
+                        <Label Content="Imprimir" Height="30" Width="76"  />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
